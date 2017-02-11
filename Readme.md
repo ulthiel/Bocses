@@ -12,7 +12,7 @@ You can download the latest version as a zip archive [here](https://bitbucket.or
 ##Example 1
 We create the following bocs.
 
-![](Example1.png)
+![](Doc/Example1.png)
 
 ```text
 //Create the bocs (differential biquiver) with 6 edges.
@@ -47,3 +47,29 @@ Bred := Reduction(B);
 //output directory (this will take longer)
 Bred := Reduction(B : DrawAll:=true);
 ```
+
+##Example2
+
+![](Doc/Example2.png)
+
+```
+B<a1,b1,c1,d1,e1,phi1,psi1,phi2,psi2> := \
+Bocs([<1,4>,<2,5>,<3,6>,<1,5>,<2,6>,<1,2>,<2,3>,<4,5>,\
+<5,6>] : Title:="Example2");
+
+B`EdgeLevels["psi2"] := 1;
+B`EdgeDegrees["phi1"] := 1;
+B`EdgeDegrees["psi1"] := 1;
+B`EdgeDegrees["phi2"] := 1;
+B`EdgeDegrees["psi2"] := 1;
+
+B`EdgeLevels["d1"] := 2;
+B`EdgeLevels["e1"] := 2;
+
+B`EdgeDifferentials["d1"] := b1*phi1-phi2*a1;
+B`EdgeDifferentials["e1"] := c1*psi1-psi2*b1;
+
+Bred := Reduction(B);
+```
+
+![](Doc/Reduction of Example2.png)
