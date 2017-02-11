@@ -14,7 +14,7 @@ We create the following bocs.
 
 ![](Example1.png)
 
-```python
+```markdown
 //Create the bocs (differential biquiver) with 6 edges.
 //Edge labels are passed as list at the beginning in
 //the same order as the successive list of tuples defining
