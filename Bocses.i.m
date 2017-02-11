@@ -100,24 +100,24 @@ intrinsic Print(G::BocsType)
 end intrinsic;
 
 //============================================================================
-intrinsic Draw(G::BocsType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, PrintEdgeLabels:=true, Title:="", Format:="svg")
+intrinsic Draw(G::BocsType : dir := "", file:="", xsize:=0, ysize:=0, Quiet:=false, PrintEdgeLabels:=true, Title:="", Format:="svg")
 {}
 
-    if Filename eq "" then
-    	if Title eq "" then
-    		dir := "Output/"*G`Title*"/";
-    		file := dir*G`Title;
-        else
-        	dir := "Output/"*Title*"/";
-        	file := dir*Title;
-        end if;
+    if dir eq "" then
+    	dir := "Output/"*G`Title;
     else
-        file := Filename;
+    	dir := "Output/"*dir;
     end if;
     
-    dir := "\""*dir*"\"";
+    //dir := Replace(dir, " ", "\\ ");
     
-    System("mkdir -p "*dir);
+    if file eq "" then
+    	file := G`Title;
+    else
+    	file := file;
+    end if;
+    
+    System("mkdir -p "*Replace(dir, " ", "\\ "));
 
 	str := "digraph G {\n";
 	str *:= "graph [fontname=Verdana];\n";
@@ -166,12 +166,15 @@ intrinsic Draw(G::BocsType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, Pri
 	end for;
 	
 	str *:= "}";
-	
-	Write(file*".dot", str : Overwrite:=true);
+		
+	Write(dir*"/"*file*".dot", str : Overwrite:=true);
 
-	System("dot \""*file*".dot\" -T"*Format*" > \""*file*"."*Format*"\"");
+	dir := Replace(dir, " ", "\\ ");
+ 	file := dir*"/"*Replace(file, " ", "\\ ");
+ 		
+	System("dot "*file*".dot -T"*Format*" > "*file*"."*Format);
 	if not Quiet then
-		System("open \""*file*"."*Format*"\"");
+		System("open "*file*"."*Format);
 	end if;
     	
 end intrinsic;

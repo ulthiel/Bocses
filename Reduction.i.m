@@ -402,7 +402,7 @@ intrinsic Reduction(G::BocsType, e::.) -> BocsType
     RemoveEdge(~Gred, e);
     
     CheckForRepresentativeInfinite(Gred);
-	
+		
     return Gred;
 
 end intrinsic;
@@ -550,18 +550,18 @@ intrinsic FindReducibleEdge(G::BocsType) -> BoolElt, RngIntElt
 end intrinsic;
 
 //==============================================================================
-intrinsic Reduction(G::BocsType : BocsTitle:="", DrawAll:=false, Limit:=0) -> BocsType, SeqEnum
+intrinsic Reduction(G::BocsType : Title:="", DrawAll:=false, Limit:=0) -> BocsType, SeqEnum
 {}
 
     count := 0;
     
-    Title := G`Title;
-
-    if BocsTitle eq "" then
-        BocsTitle := Tempname("");
+    dir := G`Title;
+   	Title := G`Title;
+   	
+   	if DrawAll then
+    	Draw(G:Quiet:=true);
     end if;
-    dir := "Tmp/"*BocsTitle;
-    System("mkdir -p "*dir);
+    
     //Draw(G:Filename:=dir*"/"*Sprint(count),Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
     //Draw(G:Filename:=dir*"/"*Sprint(count),Quiet:=true, Method:="Gephi");
 
@@ -592,15 +592,17 @@ intrinsic Reduction(G::BocsType : BocsTitle:="", DrawAll:=false, Limit:=0) -> Bo
         //Write(htmlfile, "<h2>Reduction "*Sprint(count)*"</h2>");
         //Write(htmlfile, "(Reduction at edge "*Sprint(G`Edges[b]`Label)*")<br>");
         G := Reduction(G, b);
+        G`Title := "Reduction step "*Sprint(count)*" of "*Title*" (reduction at "*b*")";
         //print G;
         Append(~steps, G);
         
-        	
         if DrawAll then
-            Draw(G:Filename:=dir*"/"*Sprint(count)*"-full",Quiet:=true, xsize:=1200, ysize:=800);
-            Draw(SimplifiedBocs(G):Filename:=dir*"/"*Sprint(count)*"-simp",Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
-            Draw(G:Filename:=dir*"/"*Sprint(count)*"-full",Quiet:=true);
-            Draw(SimplifiedBocs(G):Filename:=dir*"/"*Sprint(count)*"-simp",Quiet:=true);
+            //Draw(G:Quiet:=true, xsize:=1200, ysize:=800);
+            //Draw(SimplifiedBocs(G):Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
+            Draw(G:Quiet:=true, dir:=dir, file:="Reduction "*Sprint(count));
+            Gsimp := SimplifiedBocs(G);
+            Gsimp`Title := "Simplification of "*G`Title;
+            Draw(Gsimp:Quiet:=true, dir:=dir, file:="Reduction "*Sprint(count)*" simp");
         end if;
         /*
         Write(htmlfile, "(Removed edges: "*Sprint(removed)*")<br>");
