@@ -7,7 +7,7 @@ By [Julian Külshammer](http://www.iaz.uni-stuttgart.de/LstAGeoAlg/Kuelshammer/)
 You need [Magma](http://magma.maths.usyd.edu.au) version at least 2.19. To draw bocses, you also need [Graphviz](http://www.graphviz.org/Download..php).
 
 ###Downloading and running
-You can download the latest version as a zip archive [here](). Then just run it with ```./Bocses.sh```.
+You can download the latest version as a zip archive [here](https://bitbucket.org/ulthiel/bocses/downloads). Then just run ```./Bocses.sh```.
 
 ###Example 1
 We create the following bocs.
