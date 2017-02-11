@@ -1,14 +1,16 @@
 /*
-    CHAMP (CHerednik Algebra Magma Package)
-    Copyright (C) 2013–2015 Ulrich Thiel
-    Licensed under GNU GPLv3, see COPYING.
-    thiel@mathematik.uni-stuttgart.de
-*/
+	Bocses - A Magma package for computing with bocses.
+	
+	By 
+	
+	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	
+	and 
+	
+	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	
+	File: String.i.m
 
-/*
-    File: String.i.m
-    
-    Simple extensions for string operations
 */
 
 //=============================================================================

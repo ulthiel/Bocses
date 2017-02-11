@@ -1,19 +1,16 @@
 /*
-    CHAMP (CHerednik Algebra Magma Package)
-    Copyright (C) 2013–2015 Ulrich Thiel
-    Licensed under GNU GPLv3, see COPYING.
-    thiel@mathematik.uni-stuttgart.de
-*/
-
-/*
-	AlgFPOld.i.m
+	Bocses - A Magma package for computing with bocses.
 	
-	Intrinsics for the old type of free algebras. These have the advantage of
-	supporting arbitrarily many indeterminates.
-*/
+	By 
+	
+	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	
+	and 
+	
+	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	
+	File: AlgFPOld.i.m
 
-/*
-	Minimal Magma Version: [2,17,0]
 */
 
 //==============================================================================

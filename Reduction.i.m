@@ -1,18 +1,16 @@
 /*
-    CHAMP (CHerednik Algebra Magma Package)
-    Copyright (C) 2013–2015 Ulrich Thiel
-    Licensed under GNU GPLv3, see COPYING.
-    thiel@mathematik.uni-stuttgart.de
-*/
-
-/*
-	Bocs reduction.
+	Bocses - A Magma package for computing with bocses.
 	
-	Joint with Julian Külshammer.
-*/
+	By 
+	
+	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	
+	and 
+	
+	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	
+	File: Reduction.i.m
 
-/*
-	Minimal Magma Version: [2,19,0]
 */
 
 //==============================================================================
@@ -404,7 +402,7 @@ intrinsic Reduction(G::BocsType, e::.) -> BocsType
     RemoveEdge(~Gred, e);
     
     CheckForRepresentativeInfinite(Gred);
-
+	
     return Gred;
 
 end intrinsic;
@@ -556,6 +554,8 @@ intrinsic Reduction(G::BocsType : BocsTitle:="", DrawAll:=false, Limit:=0) -> Bo
 {}
 
     count := 0;
+    
+    Title := G`Title;
 
     if BocsTitle eq "" then
         BocsTitle := Tempname("");
@@ -636,6 +636,8 @@ intrinsic Reduction(G::BocsType : BocsTitle:="", DrawAll:=false, Limit:=0) -> Bo
 
    // Write(htmlfile, "</html></body>");
 
+	G`Title := "Reduction of "*Title*"";
+	
     return G, steps;
 
 end intrinsic;

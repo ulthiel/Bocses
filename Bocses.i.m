@@ -28,26 +28,24 @@ declare attributes BocsType:
     EdgeDegrees,
     EdgeLevels,
     EdgeAlgebra,
+    EdgesList,
     Title;
     
 declare verbose BocsType, 5;
 
 //==============================================================================
-intrinsic Bocs(V::SeqEnum, E::SeqEnum : Title:="") -> BocsType
+intrinsic Bocs(E::SeqEnum : Title:="") -> BocsType
 {}
 
     G := New(BocsType);
     
     //vertices
+    V := SetToSequence({ e[1] : e in E } join { e[2] : e in E});
     G`VertexLabels := V;
-    if #SequenceToSet(G`VertexLabels) lt #G`VertexLabels then
-    	error "Vertex labels must be unique!";
-    end if;
     
-    if not ({e[1] : e in E} join {e[2] : e in E}) subset SequenceToSet(G`VertexLabels) then
-    	error "There is an edge starting or ending in an non-defined vertex";
-    end if;
-       
+    //edges (rest taken care of by AssignNames)
+    G`EdgesList := E;
+              
     W := RSpace(Integers(),#G`VertexLabels);
     G`VertexDimensionVectors := AssociativeArray(Universe(G`VertexLabels));
     for i:=1 to #G`VertexLabels do
@@ -58,36 +56,7 @@ intrinsic Bocs(V::SeqEnum, E::SeqEnum : Title:="") -> BocsType
     for i:=1 to #V do
     	G`VertexHistories[G`VertexLabels[i]] := i;
     end for;
-    
-    //edges
-    G`EdgeLabels := [ e[3] : e in E ];
-    if #SequenceToSet(G`EdgeLabels) lt #G`EdgeLabels then
-    	error "Edge labels must be unique!";
-    end if;
-    
-    //edges
-    G`EdgeSources := AssociativeArray(Universe(G`EdgeLabels));
-    G`EdgeTails := AssociativeArray(Universe(G`EdgeLabels));
-    G`EdgeDegrees := AssociativeArray(Universe(G`EdgeLabels));
-    G`EdgeLevels := AssociativeArray(Universe(G`EdgeLabels));
-    G`EdgeDifferentials := AssociativeArray(Universe(G`EdgeLabels));
-    
-    for e in E do
-    	G`EdgeSources[e[3]] := e[1];
-    	G`EdgeTails[e[3]] := e[2];
-    	G`EdgeDegrees[e[3]] := 0;
-    	G`EdgeLevels[e[3]] := 1;
-    end for;
-    
-    //edge algebra (free algebra on edges)
-    G`EdgeAlgebra := FreeAlgebraOld(Rationals(), #E);
-    AssignNames(~G`EdgeAlgebra, G`EdgeLabels);
-    
-    //differentials
-    for e in G`EdgeLabels do
-        G`EdgeDifferentials[e] := Zero(G`EdgeAlgebra);
-    end for;
-    
+        
     if Title eq "" then
     	G`Title := Tempname("Bocs_");
     else
@@ -146,6 +115,8 @@ intrinsic Draw(G::BocsType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, Pri
         file := Filename;
     end if;
     
+    dir := "\""*dir*"\"";
+    
     System("mkdir -p "*dir);
 
 	str := "digraph G {\n";
@@ -156,11 +127,9 @@ intrinsic Draw(G::BocsType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, Pri
 	//str *:= "splines=true;\n";
 	str *:= "nodesep=0.6;\n";
 	str *:= "overlap=scalexy;\n";
-	if not Title eq "" then
-		str *:= "label=\""*Title*"\";\n";
-		str *:= "labelloc=\"t\";\n";
-		str *:= "graph [tooltip=\""*Title*"\"];\n";
-	end if;
+	str *:= "label=\""*G`Title*"\";\n";
+	str *:= "labelloc=\"t\";\n";
+	str *:= "graph [tooltip=\""*Title*"\"];\n";
 	if xsize ne 0 and ysize ne 0 then
 		str *:= "size = \""*Sprint(xsize)*","*Sprint(ysize)*"\";\n";
 	end if;
@@ -198,11 +167,11 @@ intrinsic Draw(G::BocsType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, Pri
 	
 	str *:= "}";
 	
-	Write(file*".dot", str);
+	Write(file*".dot", str : Overwrite:=true);
 
-	System("dot "*file*".dot -T"*Format*" > "*file*"."*Format);
+	System("dot \""*file*".dot\" -T"*Format*" > \""*file*"."*Format*"\"");
 	if not Quiet then
-		System("open "*file*"."*Format);
+		System("open \""*file*"."*Format*"\"");
 	end if;
     	
 end intrinsic;
@@ -322,5 +291,54 @@ intrinsic CopyBocs(B::BocsType) -> BocsType
     C`EdgeAlgebra := B`EdgeAlgebra;
     
     return C;
+
+end intrinsic;
+
+//============================================================================
+intrinsic Name(B::BocsType, i::RngIntElt) -> AlgFPOldElt
+{}
+
+	return B`EdgeAlgebra.i;
+	
+end intrinsic;
+
+//============================================================================
+intrinsic AssignNames(~G::BocsType, EdgeLabels::SeqEnum)
+{}
+	
+	E := G`EdgesList;
+		
+	 //edges
+    if #EdgeLabels ne #E then
+    	error "Edge labels must be unique!";
+    end if;
+    
+    G`EdgeLabels := EdgeLabels;
+    
+    //edges
+    G`EdgeSources := AssociativeArray(Universe(G`EdgeLabels));
+    G`EdgeTails := AssociativeArray(Universe(G`EdgeLabels));
+    G`EdgeDegrees := AssociativeArray(Universe(G`EdgeLabels));
+    G`EdgeLevels := AssociativeArray(Universe(G`EdgeLabels));
+    G`EdgeDifferentials := AssociativeArray(Universe(G`EdgeLabels));
+    
+    for i:=1 to #E do
+    	e := G`EdgesList[i];
+    	G`EdgeSources[G`EdgeLabels[i]] := e[1];
+    	G`EdgeTails[G`EdgeLabels[i]] := e[2];
+    	G`EdgeDegrees[G`EdgeLabels[i]] := 0;
+    	G`EdgeLevels[G`EdgeLabels[i]] := 1;
+    end for;
+    
+    //edge algebra (free algebra on edges)
+    G`EdgeAlgebra := FreeAlgebraOld(Rationals(), #E);
+    AssignNames(~G`EdgeAlgebra, G`EdgeLabels);
+    
+    //differentials
+    for e in G`EdgeLabels do
+        G`EdgeDifferentials[e] := Zero(G`EdgeAlgebra);
+    end for;
+        
+	return;
 
 end intrinsic;

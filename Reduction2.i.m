@@ -1,18 +1,16 @@
 /*
-    CHAMP (CHerednik Algebra Magma Package)
-    Copyright (C) 2013–2015 Ulrich Thiel
-    Licensed under GNU GPLv3, see COPYING.
-    thiel@mathematik.uni-stuttgart.de
-*/
-
-/*
-	Bocs reduction with respect to dimension vector.
+	Bocses - A Magma package for computing with bocses.
 	
-	Joint with Julian Külshammer.
-*/
+	By 
+	
+	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	
+	and 
+	
+	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	
+	File: Reduction2.i.m
 
-/*
-	Minimal Magma Version: [2,19,0]
 */
 	
 

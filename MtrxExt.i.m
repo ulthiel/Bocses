@@ -1,11 +1,16 @@
 /*
-    CHAMP (CHerednik Algebra Magma Package)
-    Copyright (C) 2013–2015 Ulrich Thiel
-    Licensed under GNU GPLv3, see COPYING.
-    thiel@mathematik.uni-stuttgart.de
-    
-    Matrices over general rings (Magma does not support this e.g. for AlgFPOld!)
- 
+	Bocses - A Magma package for computing with bocses.
+	
+	By 
+	
+	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	
+	and 
+	
+	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	
+	File: MtrxExt.i.m
+
 */
 
 
