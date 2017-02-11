@@ -52,7 +52,7 @@ Bred := Reduction(B : DrawAll:=true);
 
 ![](Doc/Example2.png)
 
-```
+```text
 B<a1,b1,c1,d1,e1,phi1,psi1,phi2,psi2> := \
 Bocs([<1,4>,<2,5>,<3,6>,<1,5>,<2,6>,<1,2>,<2,3>,<4,5>,\
 <5,6>] : Title:="Example2");
@@ -72,4 +72,4 @@ B`EdgeDifferentials["e1"] := c1*psi1-psi2*b1;
 Bred := Reduction(B);
 ```
 
-![](Doc/Reduction of Example2.png)
+![](Doc/Example2red.png)
