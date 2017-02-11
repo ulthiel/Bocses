@@ -1,25 +1,23 @@
 /*
-    CHAMP (CHerednik Algebra Magma Package)
-    Copyright (C) 2013–2015 Ulrich Thiel
-    Licensed under GNU GPLv3, see COPYING.
-    thiel@mathematik.uni-stuttgart.de
-*/
-
-/*
-	Boxes.
+	Bocses - A Magma package for computing with bocses.
 	
-	Joint with Julian Külshammer.
-*/
+	By 
+	
+	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	
+	and 
+	
+	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	
+	File: Bocses.i.m
 
-/*
-	Minimal Magma Version: [2,19,0]
 */
 
 //=============================================================================
 //Declarations
-declare type BoxType;
+declare type BocsType;
 
-declare attributes BoxType:
+declare attributes BocsType:
     VertexLabels,
     VertexDimensionVectors,
     VertexHistories,
@@ -29,15 +27,16 @@ declare attributes BoxType:
     EdgeDifferentials,
     EdgeDegrees,
     EdgeLevels,
-    EdgeAlgebra;
+    EdgeAlgebra,
+    Title;
     
-declare verbose BoxType, 5;
+declare verbose BocsType, 5;
 
 //==============================================================================
-intrinsic Box(V::SeqEnum, E::SeqEnum) -> BoxType
+intrinsic Bocs(V::SeqEnum, E::SeqEnum : Title:="") -> BocsType
 {}
 
-    G := New(BoxType);
+    G := New(BocsType);
     
     //vertices
     G`VertexLabels := V;
@@ -89,15 +88,21 @@ intrinsic Box(V::SeqEnum, E::SeqEnum) -> BoxType
         G`EdgeDifferentials[e] := Zero(G`EdgeAlgebra);
     end for;
     
+    if Title eq "" then
+    	G`Title := Tempname("Bocs_");
+    else
+    	G`Title := Title;
+    end if;
+    
     return G;
 
 end intrinsic;
 
 
 //==============================================================================
-intrinsic Print(G::BoxType)
+intrinsic Print(G::BocsType)
 {}
-	print "Box with "*Sprint(#G`VertexLabels)*" vertices and "*Sprint(#G`EdgeLabels)*" edges.";
+	print "Bocs with "*Sprint(#G`VertexLabels)*" vertices and "*Sprint(#G`EdgeLabels)*" edges.";
 	print "";
 	for v in G`VertexLabels do
         print "Vertex "*Sprint(v);
@@ -125,77 +130,85 @@ intrinsic Print(G::BoxType)
 
 end intrinsic;
 
-//=============================================================================
-intrinsic Draw(G::BoxType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, PrintEdgeLabels:=true, Title:="", Format:="svg")
+//============================================================================
+intrinsic Draw(G::BocsType : Filename:="", xsize:=0, ysize:=0, Quiet:=false, PrintEdgeLabels:=true, Title:="", Format:="svg")
 {}
 
     if Filename eq "" then
-        file := Tempname(CHAMP_GetDir()*"Tmp/graph_");
+    	if Title eq "" then
+    		dir := "Output/"*G`Title*"/";
+    		file := dir*G`Title;
+        else
+        	dir := "Output/"*Title*"/";
+        	file := dir*Title;
+        end if;
     else
         file := Filename;
     end if;
-    	
-    	str := "digraph G {\n";
-    	str *:= "graph [fontname=Verdana];\n";
-    	str *:= "edge [fontname=Verdana, fontsize=8];\n";
-    	str *:= "node [fontsize=8, fontname=Verdana, shape=circle, style=filled, fillcolor=\"#00FF70\"];\n";
-    	//str *:= "ratio = \"fill\";\n";
-    	//str *:= "splines=true;\n";
-    	str *:= "nodesep=0.6;\n";
-    	str *:= "overlap=scalexy;\n";
-    	if not Title eq "" then
-    		str *:= "label=\""*Title*"\";\n";
-    		str *:= "labelloc=\"t\";\n";
-    		str *:= "graph [tooltip=\""*Title*"\"];\n";
-    	end if;
-    	if xsize ne 0 and ysize ne 0 then
-    		str *:= "size = \""*Sprint(xsize)*","*Sprint(ysize)*"\";\n";
-    	end if;
-    	
-    	for v in G`VertexLabels do
-    		str *:= Sprint(v)*" [ tooltip=\" "*Replace(Sprint(G`VertexHistories[v]), "\"", "")*"\"];\n";
-    	end for;
-    	
-    	for e in G`EdgeLabels do
-    		str *:= Sprint(G`EdgeSources[e])*" -> "*Sprint(G`EdgeTails[e]);
-    		str *:= " [ ";
-    		comma := false;
-    		if PrintEdgeLabels then
-    			str *:= " label=\""*Sprint(e)*"\" ";
-    			comma := true;
-    		end if;
-    		if G`EdgeDegrees[e] eq 1 then
-    			if comma then
-    				str *:= ", ";
-    			end if;
-    			str *:= " style=dashed ";
-    			comma := true;
-    		end if;
-    		if comma then
-    			str *:= ", ";
-    		end if;
-    		str *:= " tooltip=\"Hallo\" ";
-    		if comma then
-    			str *:= ", ";
-    		end if;
-    		str *:= " labeldistance=2.5 ";
-    		str *:= " ];\n";
-    		    		    		
-    	end for;
-    	
-    	str *:= "}";
-    	
-    	Write(file*".dot", str);
+    
+    System("mkdir -p "*dir);
 
-		System("dot "*file*".dot -T"*Format*" > "*file*"."*Format);
-    	if not Quiet then
-    		System("open "*file*"."*Format);
-    	end if;
+	str := "digraph G {\n";
+	str *:= "graph [fontname=Verdana];\n";
+	str *:= "edge [fontname=Verdana, fontsize=8];\n";
+	str *:= "node [fontsize=8, fontname=Verdana, shape=circle, style=filled, fillcolor=\"#00FF70\"];\n";
+	//str *:= "ratio = \"fill\";\n";
+	//str *:= "splines=true;\n";
+	str *:= "nodesep=0.6;\n";
+	str *:= "overlap=scalexy;\n";
+	if not Title eq "" then
+		str *:= "label=\""*Title*"\";\n";
+		str *:= "labelloc=\"t\";\n";
+		str *:= "graph [tooltip=\""*Title*"\"];\n";
+	end if;
+	if xsize ne 0 and ysize ne 0 then
+		str *:= "size = \""*Sprint(xsize)*","*Sprint(ysize)*"\";\n";
+	end if;
+	
+	for v in G`VertexLabels do
+		str *:= Sprint(v)*" [ tooltip=\" "*Replace(Sprint(G`VertexHistories[v]), "\"", "")*"\"];\n";
+	end for;
+	
+	for e in G`EdgeLabels do
+		str *:= Sprint(G`EdgeSources[e])*" -> "*Sprint(G`EdgeTails[e]);
+		str *:= " [ ";
+		comma := false;
+		if PrintEdgeLabels then
+			str *:= " label=\""*Sprint(e)*"\" ";
+			comma := true;
+		end if;
+		if G`EdgeDegrees[e] eq 1 then
+			if comma then
+				str *:= ", ";
+			end if;
+			str *:= " style=dashed ";
+			comma := true;
+		end if;
+		if comma then
+			str *:= ", ";
+		end if;
+		str *:= " tooltip=\"Hallo\" ";
+		if comma then
+			str *:= ", ";
+		end if;
+		str *:= " labeldistance=2.5 ";
+		str *:= " ];\n";
+								
+	end for;
+	
+	str *:= "}";
+	
+	Write(file*".dot", str);
+
+	System("dot "*file*".dot -T"*Format*" > "*file*"."*Format);
+	if not Quiet then
+		System("open "*file*"."*Format);
+	end if;
     	
 end intrinsic;
 
 //==============================================================================
-intrinsic GetEdgeAlgebraVariablesDefinition(G::BoxType, GraphVar::MonStgElt) -> MonStgElt
+intrinsic GetEdgeAlgebraVariablesDefinition(G::BocsType, GraphVar::MonStgElt) -> MonStgElt
 {}
 
     str := "";
@@ -208,7 +221,7 @@ intrinsic GetEdgeAlgebraVariablesDefinition(G::BoxType, GraphVar::MonStgElt) -> 
 end intrinsic;
 
 //==============================================================================
-intrinsic AddEdge(~G::BoxType, e::Tup : Level:=1, Degree:=0)
+intrinsic AddEdge(~G::BocsType, e::Tup : Level:=1, Degree:=0)
 {}
 
 	if e[3] in G`EdgeLabels then
@@ -242,7 +255,7 @@ intrinsic AddEdge(~G::BoxType, e::Tup : Level:=1, Degree:=0)
 end intrinsic;
 
 //==============================================================================
-intrinsic AddVertex(~G::BoxType, Label::.)
+intrinsic AddVertex(~G::BocsType, Label::.)
 {}
 	if Label in G`VertexLabels then
 		error "Vertex with this label already exists.";
@@ -253,7 +266,7 @@ intrinsic AddVertex(~G::BoxType, Label::.)
 end intrinsic;
 
 //==============================================================================
-intrinsic RemoveEdge(~G::BoxType, Label::.)
+intrinsic RemoveEdge(~G::BocsType, Label::.)
 {}
 	edgenum := Position(G`EdgeLabels, Label);
 	
@@ -276,7 +289,7 @@ intrinsic RemoveEdge(~G::BoxType, Label::.)
 end intrinsic;
 
 //=============================================================================
-intrinsic RemoveVertex(~B::BoxType, Label::.)
+intrinsic RemoveVertex(~B::BocsType, Label::.)
 {}
 
 	vnum := Position(B`VertexLabels, Label);
@@ -293,10 +306,10 @@ intrinsic RemoveVertex(~B::BoxType, Label::.)
 end intrinsic;
 
 //=============================================================================
-intrinsic CopyBox(B::BoxType) -> BoxType
+intrinsic CopyBocs(B::BocsType) -> BocsType
 {}
 
-	C := New(BoxType);
+	C := New(BocsType);
    	C`VertexLabels := B`VertexLabels;
     C`VertexDimensionVectors := B`VertexDimensionVectors;
     C`VertexHistories := B`VertexHistories;

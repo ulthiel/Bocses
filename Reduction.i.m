@@ -6,7 +6,7 @@
 */
 
 /*
-	Box reduction.
+	Bocs reduction.
 	
 	Joint with Julian Külshammer.
 */
@@ -47,7 +47,7 @@ function EvaluateFOperatorForEdges(G, Fedges, tmpEdgeAlgebra, d)
 end function;
 
 //==============================================================================
-intrinsic Reduction(G::BoxType, e::.) -> BoxType
+intrinsic Reduction(G::BocsType, e::.) -> BocsType
 /*
 	Reduction of G with edge labelled by Label
 */
@@ -63,7 +63,7 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
     end if;
 
     //copy G
-    Gred := CopyBox(G);
+    Gred := CopyBocs(G);
 
 	//label for new vertex
 	if Universe(G`VertexLabels) eq Universe({1}) then
@@ -230,7 +230,7 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
         
         if IsEmpty( {isource, itail} meet {esource, etail} ) then
 
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 1)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 1)";
 
             d := EvaluateFOperatorForEdges(G, Fedges, tmpEdgeAlgebra, idiff);
     
@@ -249,8 +249,8 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             
             pos1label := Gred`EdgeLabels[pos1];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 2)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 2)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 2)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 2)";
 
             //not nec as projected to zero
             //v := MatrixExtended(2, 1, [ tmpEdgeAlgebra.Ngens(tmpEdgeAlgebra)*tmpEdgeAlgebra.pos1 - tmpEdgeAlgebra.pos1*tmpEdgeAlgebra.(#Gred`Edges + isource), tmpEdgeAlgebra.(#Gred`Edges + esource)*tmpEdgeAlgebra.i - tmpEdgeAlgebra.i*tmpEdgeAlgebra.(#Gred`Edges + isource)]);
@@ -270,8 +270,8 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             
             pos1label := Gred`EdgeLabels[pos1];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 3)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 3)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 3)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 3)";
 
             Gred`EdgeDifferentials[i] := projection(Entry(newdiff,1,1));
             Gred`EdgeDifferentials[pos1label] := projection(Entry(newdiff,2,1));
@@ -285,8 +285,8 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             //not nec as projected to zero
             //v := MatrixExtended(1, 2, [ tmpEdgeAlgebra.(#Gred`Edges + itail)*tmpEdgeAlgebra.pos1 - tmpEdgeAlgebra.pos1*tmpEdgeAlgebra.Ngens(tmpEdgeAlgebra), tmpEdgeAlgebra.(#Gred`Edges + itail)*tmpEdgeAlgebra.i - tmpEdgeAlgebra.i*tmpEdgeAlgebra.(#Gred`Edges + esource)]);
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 4)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 4)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 4)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 4)";
             
             newdiff := Fvertices[itail]*Fedges[i] - Fedges[i]*Fvertices[esource] + EvaluateFOperatorForEdges(G, Fedges, tmpEdgeAlgebra, idiff);
 
@@ -303,8 +303,8 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             
             pos1label := Gred`EdgeLabels[pos1];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 5)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 5)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 5)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 5)";
 
             Gred`EdgeDifferentials[i] := projection(Entry(newdiff,1,1));
             Gred`EdgeDifferentials[pos1label] := projection(Entry(newdiff,1,2));
@@ -321,10 +321,10 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             pos2label := Gred`EdgeLabels[pos2];
             pos3label := Gred`EdgeLabels[pos3];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 6)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 6)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 6)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 6)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 6)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 6)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 6)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 6)";
 
             Gred`EdgeDifferentials[pos1label] := projection(Entry(newdiff,1,1));
             Gred`EdgeDifferentials[pos2label] := projection(Entry(newdiff,1,2));
@@ -343,10 +343,10 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             pos2label := Gred`EdgeLabels[pos2];
             pos3label := Gred`EdgeLabels[pos3];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 7)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 7)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 7)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 7)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 7)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 7)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 7)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 7)";
 
             Gred`EdgeDifferentials[i] := projection(Entry(newdiff,1,1));
             Gred`EdgeDifferentials[pos1label] := projection(Entry(newdiff,1,2));
@@ -365,10 +365,10 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             pos2label := Gred`EdgeLabels[pos2];
             pos3label := Gred`EdgeLabels[pos3];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 8)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 8)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 8)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 8)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 8)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 8)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 8)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 8)";
 
             Gred`EdgeDifferentials[pos1label] := projection(Entry(newdiff,1,1));
             Gred`EdgeDifferentials[i] := projection(Entry(newdiff,1,2));
@@ -389,10 +389,10 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
             pos2label := Gred`EdgeLabels[pos2];
             pos3label := Gred`EdgeLabels[pos3];
 
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 9)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 9)";
-            vprint BoxType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 9)";
-            vprint BoxType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 9)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos1])*" changed (case 9)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos2])*" changed (case 9)";
+            vprint BocsType, 5: "Differential of "*Sprint(Gred`EdgeLabels[pos3])*" changed (case 9)";
+            vprint BocsType, 5: "Differential of "*Sprint(Sprint(i))*" changed (case 9)";
 
             Gred`EdgeDifferentials[pos1label] := projection(Entry(newdiff,1,1));
             Gred`EdgeDifferentials[pos2label] := projection(Entry(newdiff,1,2));
@@ -410,19 +410,19 @@ intrinsic Reduction(G::BoxType, e::.) -> BoxType
 end intrinsic;
 
 //==============================================================================
-intrinsic CheckForRepresentativeInfinite(B::BoxType)
+intrinsic CheckForRepresentativeInfinite(B::BocsType)
 {}
 
 	for i in B`EdgeLabels do
         if B`EdgeSources[i] eq B`EdgeTails[i] and B`EdgeDifferentials[i] eq 0 and B`EdgeDegrees[i] eq 0 then
-        	error "Representation-infinite (CheckForRepresentativeInfinite)!\nBox:\n "*Sprint(B);
+        	error "Representation-infinite (CheckForRepresentativeInfinite)!\nBocs:\n "*Sprint(B);
         end if;
     end for;
 
 end intrinsic;
 
 //==============================================================================
-intrinsic RemoveSuperfluous(G::BoxType, e::.) -> BoxType
+intrinsic RemoveSuperfluous(G::BocsType, e::.) -> BocsType
 {}
 
     edgenum := Position(G`EdgeLabels, e);
@@ -435,7 +435,7 @@ intrinsic RemoveSuperfluous(G::BoxType, e::.) -> BoxType
     end if;
 
     //copy G
-    Grem := CopyBox(G);
+    Grem := CopyBocs(G);
     
     mons, coeffs := MonomialsAndCoefficients(G`EdgeDifferentials[e]);
     monsandcoeffsoflength1 := [ <coeffs[i],Eltseq(mons[i])[1]> : i in [1..#mons] | #mons[i] eq 1 and G`EdgeDegrees[G`EdgeLabels[Eltseq(mons[i])[1]]] eq 1];
@@ -474,7 +474,7 @@ intrinsic RemoveSuperfluous(G::BoxType, e::.) -> BoxType
 end intrinsic;
 
 //==============================================================================
-intrinsic FindSuperfluousEdge(G::BoxType : Method:="New") -> BoolElt, .
+intrinsic FindSuperfluousEdge(G::BocsType : Method:="New") -> BoolElt, .
 {}
 
     for e in G`EdgeLabels do
@@ -509,14 +509,14 @@ intrinsic FindSuperfluousEdge(G::BoxType : Method:="New") -> BoolElt, .
 end intrinsic;
 
 //==============================================================================
-intrinsic RemoveSuperfluous(G::BoxType) -> BoxType, RngIntElt, SeqEnum
+intrinsic RemoveSuperfluous(G::BocsType) -> BocsType, RngIntElt, SeqEnum
 {}
 
     count := 0;
     removed := [];
     foundsuperfluous, a := FindSuperfluousEdge(G);
     while foundsuperfluous do
-        vprint BoxType, 5: "Removing "*a;
+        vprint BocsType, 5: "Removing "*a;
         Append(~removed, a);
         G := RemoveSuperfluous(G, a);
         count +:= 1;
@@ -530,7 +530,7 @@ intrinsic RemoveSuperfluous(G::BoxType) -> BoxType, RngIntElt, SeqEnum
 end intrinsic;
 
 //==============================================================================
-intrinsic FindReducibleEdge(G::BoxType) -> BoolElt, RngIntElt
+intrinsic FindReducibleEdge(G::BocsType) -> BoolElt, RngIntElt
 {}
 
     candidates := [ <G`EdgeLevels[G`EdgeLabels[i]], i> : i in [1..#G`EdgeLabels] | G`EdgeDegrees[G`EdgeLabels[i]] eq 0 and G`EdgeDifferentials[G`EdgeLabels[i]] eq 0 ];
@@ -552,15 +552,15 @@ intrinsic FindReducibleEdge(G::BoxType) -> BoolElt, RngIntElt
 end intrinsic;
 
 //==============================================================================
-intrinsic Reduction(G::BoxType : BoxTitle:="", DrawAll:=false, Limit:=0) -> BoxType, SeqEnum
+intrinsic Reduction(G::BocsType : BocsTitle:="", DrawAll:=false, Limit:=0) -> BocsType, SeqEnum
 {}
 
     count := 0;
 
-    if BoxTitle eq "" then
-        BoxTitle := Tempname("");
+    if BocsTitle eq "" then
+        BocsTitle := Tempname("");
     end if;
-    dir := "Tmp/"*BoxTitle;
+    dir := "Tmp/"*BocsTitle;
     System("mkdir -p "*dir);
     //Draw(G:Filename:=dir*"/"*Sprint(count),Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
     //Draw(G:Filename:=dir*"/"*Sprint(count),Quiet:=true, Method:="Gephi");
@@ -568,7 +568,7 @@ intrinsic Reduction(G::BoxType : BoxTitle:="", DrawAll:=false, Limit:=0) -> BoxT
     //htmlfile := dir*"/reduction.html";
     //Write(htmlfile, "<html>\n<style>body{font-family: verdana, serif;font-size:10pt;}</style >\n<body>" : Overwrite:=true);
     // Write(htmlfile, "<a href=\"mailto:kuelshammer@mathematik.uni-stuttgart.de\">Julian K&uuml;lshammer</a><br><a href=\"mailto:thiel@mathematik.uni-stuttgart.de\">Ulrich Thiel</a>");
-    //Write(htmlfile, "<h1>Reduction of box \""*BoxTitle*"\"</h1>");
+    //Write(htmlfile, "<h1>Reduction of box \""*BocsTitle*"\"</h1>");
     //Write(htmlfile, Date());
 
     //Write(htmlfile, "<h2>Initial box</h2>");
@@ -598,9 +598,9 @@ intrinsic Reduction(G::BoxType : BoxTitle:="", DrawAll:=false, Limit:=0) -> BoxT
         	
         if DrawAll then
             Draw(G:Filename:=dir*"/"*Sprint(count)*"-full",Quiet:=true, xsize:=1200, ysize:=800);
-            Draw(SimplifiedBox(G):Filename:=dir*"/"*Sprint(count)*"-simp",Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
+            Draw(SimplifiedBocs(G):Filename:=dir*"/"*Sprint(count)*"-simp",Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
             Draw(G:Filename:=dir*"/"*Sprint(count)*"-full",Quiet:=true);
-            Draw(SimplifiedBox(G):Filename:=dir*"/"*Sprint(count)*"-simp",Quiet:=true);
+            Draw(SimplifiedBocs(G):Filename:=dir*"/"*Sprint(count)*"-simp",Quiet:=true);
         end if;
         /*
         Write(htmlfile, "(Removed edges: "*Sprint(removed)*")<br>");
@@ -641,10 +641,10 @@ intrinsic Reduction(G::BoxType : BoxTitle:="", DrawAll:=false, Limit:=0) -> BoxT
 end intrinsic;
 
 //==================================================================================
-intrinsic SimplifiedBox(G::BoxType) -> BoxType
+intrinsic SimplifiedBocs(G::BocsType) -> BocsType
 {}
 
-    H := New(BoxType);
+    H := New(BocsType);
     H`VertexLabels := G`VertexLabels;
     H`VertexDimensionVectors := G`VertexDimensionVectors;
     H`VertexHistories := G`VertexHistories;

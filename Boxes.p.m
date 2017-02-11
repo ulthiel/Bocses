@@ -7,8 +7,8 @@
 
 {
     "AlgFPOld.i.m",
-    "Boxes.i.m",
-    "BoxReduction.i.m",
-    "BoxReduction2.i.m",
+    "Bocses.i.m",
+    "BocsReduction.i.m",
+    "BocsReduction2.i.m",
     "MtrxExt.i.m"
 }
