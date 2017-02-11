@@ -14,13 +14,14 @@ We create the following bocs.
 
 ![](Example1.png)
 
-```objectivec
+```text
 //Create the bocs (differential biquiver) with 6 edges.
 //Edge labels are passed as list at the beginning in
 //the same order as the successive list of tuples defining
 //the edges. The edge labels can be used to define the
 //differentials later.
-B<a12,a23,a13,phi12,phi23,phi13>:=Bocs([<1,2>,<2,3>, <1,3>, <1,2>,<2,3>,<1,3>] : Title:="Example1"); 
+B<a12,a23,a13,phi12,phi23,phi13>:=Bocs([<1,2>,<2,3>, <1,3>,\
+<1,2>,<2,3>,<1,3>] : Title:="Example1"); 
 
 //Set edge degrees
 B`EdgeDegrees["phi12"] :=1;
