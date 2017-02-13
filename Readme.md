@@ -42,6 +42,9 @@ Draw(B);
 //Do reduction
 Bred := Reduction(B);
 
+//draw without adding edge labels
+Draw(Bred : EdgeLabels:=false);
+
 //Silently draw each reduction step and put in 
 //output directory.
 Bred := Reduction(B : DrawAll:=true);

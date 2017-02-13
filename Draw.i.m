@@ -14,7 +14,7 @@
 */
 
 //============================================================================
-intrinsic Draw(B::BocsType : Dir:="", File:="", Quiet:=false)
+intrinsic Draw(B::BocsType : Dir:="", File:="", Quiet:=false, EdgeLabels:=true)
 {}
 
 	if Dir eq "" then
@@ -52,7 +52,14 @@ var cy = cytoscape({
         'width': 1,
         'curve-style': 'bezier',
         'font-size' : '10',
-        'line-style': 'data(myLineStyle)',
+        'line-style': 'data(myLineStyle)',";
+        
+    if EdgeLabels then
+        codestr *:= "
+        'label': 'data(id)'";
+    end if;
+    
+    codestr *:="
       }),
   
   elements: {
