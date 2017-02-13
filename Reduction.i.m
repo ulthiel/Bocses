@@ -39,6 +39,8 @@ function EvaluateFOperatorForEdges(G, Fedges, tmpEdgeAlgebra, d)
     if IsEmpty(termevals) then
         return Zero(tmpEdgeAlgebra);
     else
+    	//print [ <M`Nrows, M`Ncols> : M in termevals ]; 
+    	//print termevals;
         return &+termevals;
     end if;
 
@@ -649,6 +651,7 @@ intrinsic SimplifiedBocs(G::BocsType) -> BocsType
 {}
 
     H := New(BocsType);
+    H`Title := "Simplification of "*G`Title;
     H`VertexLabels := G`VertexLabels;
     H`VertexDimensionVectors := G`VertexDimensionVectors;
     H`VertexHistories := G`VertexHistories;

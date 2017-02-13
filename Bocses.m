@@ -14,3 +14,4 @@
 */
 
 AttachSpec("Bocses.s.m");
+SetColumns(0);

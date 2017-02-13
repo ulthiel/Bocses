@@ -100,7 +100,7 @@ intrinsic Print(G::BocsType)
 end intrinsic;
 
 //============================================================================
-intrinsic Draw(G::BocsType : dir := "", file:="", xsize:=0, ysize:=0, Quiet:=false, PrintEdgeLabels:=true, Title:="", Format:="svg")
+intrinsic DrawOld(G::BocsType : dir := "", file:="", xsize:=0, ysize:=0, Quiet:=false, PrintEdgeLabels:=true, Title:="", Format:="svg")
 {}
 
     if dir eq "" then
