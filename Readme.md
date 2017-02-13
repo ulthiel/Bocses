@@ -10,9 +10,11 @@ You need [Magma](http://magma.maths.usyd.edu.au) version at least 2.19.
 You can download the latest version as a zip archive [here](https://bitbucket.org/ulthiel/bocses/downloads). Then just run ```./Bocses.sh```.
 
 ##Example 1
-Below is an example of a bocs as an interactive graph (click [here](Doc/Example1.html) for a full screen view). You can zoom in, move around, move the nodes. A click on an edge reveals extra information. Let's create this bocs.
+As an example, we want to create <a href="http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example1.html" target="_blank">this</a> bocs. The linked website shows an interactive graph created by the ```Draw``` command. You can zoom in, move around, move the nodes. A click on an edge reveals extra information. Let's create this bocs now.
 
+<!--
 <iframe src="http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example1.html", frameborder="0", width="350", height="350", scrolling="no", align="center"></iframe>  
+-->
 
 ```text
 //First, create the underlying quiver of the bocs.
