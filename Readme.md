@@ -47,8 +47,7 @@ Bred := Reduction(B);
 Bred := Reduction(B : DrawAll:=true);
 ```
 
-You can find an interactive graph of the reduction [here]
-(http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Reduction of Example1.html).
+You can find an interactive graph of the reduction [here](http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Reduction of Example1.html).
 
 
 ##Example2
