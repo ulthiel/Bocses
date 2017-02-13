@@ -11,11 +11,7 @@ You can download the latest version as a zip archive [here](https://bitbucket.or
 
 ##Example 1
 As an example, we want to create [this]
-(http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example1.html){:target="_blank"} bocs. The linked website shows an interactive graph created by the ```Draw``` command. You can zoom in, move around, move the nodes. A click on an edge reveals extra information. Let's create this bocs now.
-
-<!--
-<iframe src="http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example1.html", frameborder="0", width="350", height="350", scrolling="no", align="center"></iframe>  
--->
+(http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example1.html) bocs. The linked website shows an interactive graph created by the ```Draw``` command. You can zoom in, move around, move the nodes. A click on an edge reveals extra information. Let's create this bocs now.
 
 ```text
 //First, create the underlying quiver of the bocs.
@@ -52,16 +48,14 @@ Bred := Reduction(B);
 Bred := Reduction(B : DrawAll:=true);
 ```
 
-The reduction looks as follows (click [here](Doc/Reduction of Example1.html) for a full screen view):
-
-<iframe src="Doc/Reduction of Example1.html", frameborder="0", width="400", height="400", scrolling="no", align="center"></iframe>
+You can find an interactive graph of the reduction [here]
+(http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Reduction of Example1.html).
 
 
 ##Example2
 
-In this example we do a reduction of the bocs below at a specific dimension vector. The result is a whole list of bocses, each bocs representing one step in the reduction process.
-
-<iframe src="Doc/Example2.html", frameborder="0", width="400", height="400", scrolling="no", align="center"></iframe>
+In this example we do a reduction of [this]
+(http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example2.html) bocs at a specific dimension vector. The result is a whole list of bocses, each bocs representing one step in the reduction process.
 
 ```text
 B<a1,a2,a3,a4,a6,a5,a7,a8,b3,b4,b6,b5,b7,c4,c6,phi4,phi6,phi7,\
