@@ -52,8 +52,7 @@ You can find an interactive graph of the reduction [here](http://www.mathematik.
 
 ##Example2
 
-In this example we do a reduction of [this]
-(http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example2.html) bocs at a specific dimension vector. The result is a whole list of bocses, each bocs representing one step in the reduction process.
+In this example we do a reduction of [this](http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example2.html) bocs at a specific dimension vector. The result is a whole list of bocses, each bocs representing one step in the reduction process.
 
 ```text
 B<a1,a2,a3,a4,a6,a5,a7,a8,b3,b4,b6,b5,b7,c4,c6,phi4,phi6,phi7,\
