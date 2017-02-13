@@ -34,14 +34,20 @@ declare attributes BocsType:
 declare verbose BocsType, 5;
 
 //==============================================================================
-intrinsic Bocs(E::SeqEnum : Title:="") -> BocsType
+intrinsic Bocs(V::SeqEnum, E::SeqEnum : Title:="") -> BocsType
 {}
 
     G := New(BocsType);
     
     //vertices
-    V := SetToSequence({ e[1] : e in E } join { e[2] : e in E});
     G`VertexLabels := V;
+    if #SequenceToSet(G`VertexLabels) lt #G`VertexLabels then
+    	error "Vertex labels must be unique!";
+    end if;
+    
+    if not ({e[1] : e in E} join {e[2] : e in E}) subset SequenceToSet(G`VertexLabels) then
+    	error "There is an edge starting or ending in an non-defined vertex";
+    end if;
     
     //edges (rest taken care of by AssignNames)
     G`EdgesList := E;

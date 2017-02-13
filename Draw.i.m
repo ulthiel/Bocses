@@ -50,7 +50,7 @@ var cy = cytoscape({
       .css({
         'target-arrow-shape': 'triangle',
         'width': 1,
-        'curve-style': 'unbundled-bezier',
+        'curve-style': 'bezier',
         'font-size' : '10',
         'line-style': 'data(myLineStyle)',
       }),
@@ -98,7 +98,7 @@ var cy = cytoscape({
     name: 'grid',
     directed: true,
     roots: '#a',
-    padding: 30
+    padding: 50
   }
 });";
 
