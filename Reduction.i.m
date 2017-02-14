@@ -557,7 +557,7 @@ intrinsic Reduction(G::BocsType : Title:="", DrawAll:=false, Limit:=0) -> BocsTy
 
     count := 0;
     
-    dir := G`Title;
+    Dir := G`Title;
    	Title := G`Title;
    	
    	if DrawAll then
@@ -601,10 +601,10 @@ intrinsic Reduction(G::BocsType : Title:="", DrawAll:=false, Limit:=0) -> BocsTy
         if DrawAll then
             //Draw(G:Quiet:=true, xsize:=1200, ysize:=800);
             //Draw(SimplifiedBocs(G):Quiet:=true, PrintEdgeLabels:=true, xsize:=1200, ysize:=800);
-            Draw(G:Quiet:=true, dir:=dir, file:="Reduction "*Sprint(count));
+            Draw(G:Quiet:=true, Dir:=Dir, File:="Reduction step "*Sprint(count));
             Gsimp := SimplifiedBocs(G);
             Gsimp`Title := "Simplification of "*G`Title;
-            Draw(Gsimp:Quiet:=true, dir:=dir, file:="Reduction "*Sprint(count)*" simp");
+            Draw(Gsimp:Quiet:=true, Dir:=Dir, File:="Reduction "*Sprint(count)*" simp");
         end if;
         /*
         Write(htmlfile, "(Removed edges: "*Sprint(removed)*")<br>");
