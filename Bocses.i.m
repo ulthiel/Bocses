@@ -253,6 +253,7 @@ intrinsic RemoveEdge(~G::BocsType, Label::.)
     Remove(~G`EdgeSources, Label);
     Remove(~G`EdgeTails, Label);
     Remove(~G`EdgeDifferentials, Label);
+    Remove(~G`EdgeDegrees, Label);
 
     oldEdgeAlgebra := G`EdgeAlgebra;
     G`EdgeAlgebra := FreeAlgebraOld(Rationals(), #G`EdgeLabels);
