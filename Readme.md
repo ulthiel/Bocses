@@ -71,7 +71,7 @@ In this example we do a reduction of the following bocs at a specific dimension 
 
  The result is a whole list of bocses, each bocs representing one step in the reduction process.
 
-```text
+```c++
 B<a1,a2,a3,a4,a6,a5,a7,a8,b3,b4,b6,b5,b7,c4,c6,phi4,phi6,phi7,\
 phi9,phi10,psi6,psi9> := Bocs([1,2,3,4,5,6,7,8,9,10,11],\
 [<1,2>,<2,3>,<3,4>,<4,6>,<6,9>,<5,7>,<7,10>,<8,11>,<3,5>,\
