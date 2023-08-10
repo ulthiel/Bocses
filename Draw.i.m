@@ -177,8 +177,8 @@ var cy = cytoscape({
 
 		<script src=\"http://code.jquery.com/jquery-2.0.3.min.js\"></script>
 		<script src=\"http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.js\"></script>
-		<script src=\"http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js\"></script>
-		<script src=\"http://cdn.rawgit.com/cytoscape/cytoscape.js-qtip/master/cytoscape-qtip.js\"></script>
+		<script src=\"https://cdn.jsdelivr.net/npm/cytoscape@3.26.0/dist/cytoscape.min.js\"></script>
+		<script src=\"https://cdn.jsdelivr.net/npm/cytoscape-qtip@2.8.0/cytoscape-qtip.min.js\"></script>
 <script src=\""*File*".js\"></script>
 </head>
 <body>
