@@ -1,18 +1,27 @@
-#Bocses  
-A [Magma](http://magma.maths.usyd.edu.au) package for computing with [bocses](https://arxiv.org/abs/1601.03899).  
-By [Julian Külshammer](http://www.iaz.uni-stuttgart.de/LstAGeoAlg/Kuelshammer/) and [Ulrich Thiel](http://www.mathematik.uni-stuttgart.de/~thiel/).
+# Bocses  
+A [Magma](http://magma.maths.usyd.edu.au) software package for computing with [bocses](https://arxiv.org/abs/1601.03899).  
 
+By [Julian Külshammer](https://julian-kuelshammer.github.io/) and [Ulrich Thiel](https://ulthiel.com/math), 2017
 
-##Prerequisites
+## Prerequisites
 You need [Magma](http://magma.maths.usyd.edu.au) version at least 2.19. 
 
-##Downloading and running
-You can download the latest version as a zip archive [here](https://bitbucket.org/ulthiel/bocses/downloads). Then just run ```./Bocses.sh```.
+## Downloading and running
+You can download the latest version as a zip archive [here](https://bitbucket.org/ulthiel/bocses/downloads). Then just run ```./Bocses.sh```. 
 
-##Example 1
-As an example, we want to create [this](http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example1.html) bocs. The linked website shows an interactive graph created by the ```Draw``` command. You can zoom in, move around, move the nodes. A click on an edge reveals extra information. Let's create this bocs now.
+Alternatively, from within a Magma session, run ```AttachSpec("Bocses.s.m");```.
 
-```text
+## Usage
+
+We illustrate the use of this software with two examples.
+
+### Example 1
+
+We want to create the following bocs and its reduction:
+
+<img src="doc/img/ex1.png" style="zoom:50%;" />
+
+```c++
 //First, create the underlying quiver of the bocs.
 //Edge labels are passed as list at the beginning in
 //the same order as the successive list of tuples defining
@@ -50,12 +59,17 @@ Draw(Bred : EdgeLabels:=false);
 Bred := Reduction(B : DrawAll:=true);
 ```
 
-You can find an interactive graph of the reduction [here](http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Reduction of Example1.html).
+The ```Draw``` command will create and open an HTML file in the ```Output``` directory containing the bocs as an interactive graph (vertices and edges can be moved with the mouse). The reduction of the bocs above looks as follows:
 
+<img src="doc/img/ex1-red.png" style="zoom:50%;" />
 
-##Example2
+## Example 2
 
-In this example we do a reduction of [this](http://www.mathematik.uni-stuttgart.de/~thiel/Bocses/Doc/Example2.html) bocs at a specific dimension vector. The result is a whole list of bocses, each bocs representing one step in the reduction process.
+In this example we do a reduction of the following bocs at a specific dimension vector:
+
+<img src="doc/img/ex2.png" style="zoom:50%;" />
+
+ The result is a whole list of bocses, each bocs representing one step in the reduction process.
 
 ```text
 B<a1,a2,a3,a4,a6,a5,a7,a8,b3,b4,b6,b5,b7,c4,c6,phi4,phi6,phi7,\
@@ -95,4 +109,3 @@ B`EdgeDifferentials["psi9"] := phi10*phi9;
 
 Bred := Reduction(B, [ 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1 ]);
 ```
-
