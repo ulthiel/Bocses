@@ -7,7 +7,7 @@ By [Julian Külshammer](https://julian-kuelshammer.github.io/) and [Ulrich Thiel
 You need [Magma](http://magma.maths.usyd.edu.au) version at least 2.19. 
 
 ## Downloading and running
-You can download the latest version as a zip archive [here](https://bitbucket.org/ulthiel/bocses/downloads). Then just run ```./Bocses.sh```. 
+You can download the latest version as a zip archive [here](https://github.com/ulthiel/Bocses/archive/refs/heads/master.zip). Then just run ```./Bocses.sh```. 
 
 Alternatively, from within a Magma session, run ```AttachSpec("Bocses.s.m");```.
 
