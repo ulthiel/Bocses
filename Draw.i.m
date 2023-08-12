@@ -29,8 +29,7 @@ intrinsic Draw(B::BocsType : Dir:="", File:="", Quiet:=false, EdgeLabels:=true)
     	File := File;
     end if;
     
-    //System("mkdir -p "*Replace(Dir, " ", "\\ "));
-    MakeDirectory(Dir);
+    System("mkdir -p "*Replace(Dir, " ", "\\ "));
     
     
 	//code
@@ -197,11 +196,12 @@ var cy = cytoscape({
  	File := Replace(File, " ", "\\ ");
 	
 	if not Quiet then
-    if GetOSType() eq "Win" then
-		  System("start "*Dir*"/"*File*".html");
-    else
-      System("open "*Dir*"/"*File*".html");
-    end if;
+		System("open "*Dir*"/"*File*".html");
 	end if;
 
 end intrinsic;
+
+function QTip()
+
+
+end function;
