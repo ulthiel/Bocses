@@ -3,11 +3,11 @@
 	
 	By 
 	
-	Julian Külshammer (julian.kuelshammer@mathematik.uni-stuttgart.de)
+	Julian Külshammer (julian.kuelshammer@math.uu.se)
 	
 	and 
 	
-	Ulrich Thiel (thiel@mathematik.uni-stuttgart.de)
+	Ulrich Thiel (thiel@mathematik.uni-kl.de)
 	
 	File: Draw.i.m
 
@@ -173,12 +173,20 @@ var cy = cytoscape({
 <meta charset=utf-8 />
 <meta name=\"viewport\" content=\"user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0\">
 <title>"*B`Title*"</title>
-<link rel=\"stylesheet\" type=\"text/css\" href=\"http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.css\">
-
-		<script src=\"http://code.jquery.com/jquery-2.0.3.min.js\"></script>
-		<script src=\"http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.js\"></script>
-		<script src=\"https://cdn.jsdelivr.net/npm/cytoscape@3.26.0/dist/cytoscape.min.js\"></script>
-		<script src=\"https://cdn.jsdelivr.net/npm/cytoscape-qtip@2.8.0/cytoscape-qtip.min.js\"></script>
+<link rel=\"stylesheet\" type=\"text/css\" 
+href=\"http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.css\">
+<script
+src=\"http://code.jquery.com/jquery-2.0.3.min.js\">
+</script>
+<script 
+src=\"http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.js\">
+</script>
+<script 
+src=\"https://cdn.jsdelivr.net/npm/cytoscape@3.26.0/dist/cytoscape.min.js\">
+</script>
+<script 
+src=\"https://cdn.jsdelivr.net/npm/cytoscape-qtip@2.8.0/cytoscape-qtip.min.js\">
+</script>
 <script src=\""*File*".js\"></script>
 </head>
 <body>
